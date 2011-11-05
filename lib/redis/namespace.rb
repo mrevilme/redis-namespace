@@ -159,7 +159,11 @@ class Redis
     attr_accessor :namespace
 
     def initialize(namespace, options = {})
-      @namespace = namespace
+      if namespace.is_a? Array
+        @namespace = namespace.join ":"
+      else
+        @namespace = namespace
+      end
       @redis = options[:redis]
     end
 
